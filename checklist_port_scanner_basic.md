@@ -8,11 +8,13 @@
 
 ## 1. Nhập mục tiêu
 
-- [ ] Cho phép nhập địa chỉ IP hoặc tên miền
-- [ ] Xóa khoảng trắng thừa bằng `strip()`
-- [ ] Chuyển tên miền thành IP bằng `socket.gethostbyname()`
-- [ ] Báo lỗi khi tên miền không tồn tại
-- [ ] Hiển thị IP sau khi phân giải thành công
+- [X] Cho phép nhập địa chỉ IP hoặc tên miền
+--> Nếu IP --> quét\
+--> Nếu domain --> Phân giải --> quét
+- [X] Xóa khoảng trắng thừa bằng `strip()`
+- [X] Chuyển tên miền thành IP bằng `socket.gethostbyname()`
+- [X] Báo lỗi khi tên miền không tồn tại
+- [X] Hiển thị IP sau khi phân giải thành công
 
 Ví dụ:
 
