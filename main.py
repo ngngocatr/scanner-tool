@@ -1,5 +1,5 @@
 import argparse
-from scanner.host_discovery import check_live_host
+from scanner.host_check import check_live_host
 
 
 def parse_arg():
