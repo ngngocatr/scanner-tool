@@ -27,12 +27,12 @@ Resolved IP: 93.184.216.34
 
 ## 2. Nhập phạm vi cổng
 
-- [ ] Nhập cổng bắt đầu
-- [ ] Nhập cổng kết thúc
-- [ ] Chuyển dữ liệu nhập sang kiểu `int`
-- [ ] Kiểm tra cổng nằm trong khoảng `1–65535`
-- [ ] Kiểm tra cổng bắt đầu không lớn hơn cổng kết thúc
-- [ ] Báo lỗi nếu người dùng nhập chữ hoặc ký tự không hợp lệ
+- [X] Nhập cổng bắt đầu
+- [X] Nhập cổng kết thúc
+- [X] Chuyển dữ liệu nhập sang kiểu `int`
+- [X] Kiểm tra cổng nằm trong khoảng `1–65535`
+- [X] Kiểm tra cổng bắt đầu không lớn hơn cổng kết thúc
+- [X] Báo lỗi nếu người dùng nhập chữ hoặc ký tự không hợp lệ
 
 Ví dụ:
 

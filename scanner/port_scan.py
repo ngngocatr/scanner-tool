@@ -19,3 +19,20 @@ def common_ports_scan(host):
         return False
 
 # print(common_ports_scan("192.168.1.201"))
+
+# host: string
+# port: list
+def scan_ports(host, port_range):
+    open_ports_list=[]
+    for i in port_range:
+        # socket(family_address, protocol)
+        scanner = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # timeout = 0.3s
+        scanner.settimeout(0.3)
+        # connect_ex((IP, port))
+        result = scanner.connect_ex((host, i))
+        # check and display
+        if result==0:
+            print(f'[+] Port {i} đang mở')
+            open_ports_list.append(i)
+    return open_ports_list
