@@ -1,10 +1,17 @@
 import argparse
 import time
+import pyfiglet
+
 from scanner.host_check import check_live_host
 from scanner.target import validate_ip, resolve_domain, parse_port
 from scanner.port_scan import scan_ports
 
 # IS_ERR = False
+
+# Banner
+def banner_display():
+    text = pyfiglet.figlet_format("SCANNER")
+    print(text)
 
 # Load arguments
 def parse_arg():
@@ -43,7 +50,7 @@ def get_target_ip(host):
     # Nếu người dùng nhập domain
     else:
         print("Đang phân giải tên miền....")
-        print('----------------------------')
+        print('-'*48)
         ip=resolve_domain(host)
         if (ip is None):
             print("[!] Không thể phân giải tên miền!")
@@ -57,7 +64,7 @@ def get_target_ip(host):
 def display_host_status(ip):
     if (validate_ip(ip)):
         print(f'Đang kiểm tra live host....')
-        print('----------------------------')
+        print('-'*48)
         if check_live_host(ip):
                 print(f'[+] Host {ip} is up')
         else:
@@ -75,15 +82,19 @@ def scan_port_range(host, port_input):
 
     mode, port_list = parsed_result
 
-    print(f'Target: {host}')
-    print(f'Mode: {mode}')
-    print('Scanning.......')
+    print('-'*48)
+    print(f'[+] Target: {host}')
+    print(f'[+] Mode: {mode}')
+    print('-'*48)
+    print('[+] Scanning.......')
+
 
     open_ports = scan_ports(host, port_list)
     return open_ports
     
 
 def main():
+    banner_display()
     args = parse_arg()
 
     host=args.host
@@ -108,4 +119,4 @@ if __name__=="__main__":
 
     # End time
     end = time.perf_counter()
-    print(f"Tổng thời gian quét: {end - start:.2f} giây")
+    print(f"[+] Tổng thời gian quét: {end - start:.2f} giây")

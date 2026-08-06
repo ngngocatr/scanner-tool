@@ -23,16 +23,35 @@ def common_ports_scan(host):
 # host: string
 # port: list
 def scan_ports(host, port_range):
-    open_ports_list=[]
-    for i in port_range:
-        # socket(family_address, protocol)
-        scanner = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # timeout = 0.3s
-        scanner.settimeout(0.3)
-        # connect_ex((IP, port))
-        result = scanner.connect_ex((host, i))
-        # check and display
-        if result==0:
-            print(f'[+] Port {i} đang mở')
-            open_ports_list.append(i)
+    try:
+        open_ports_list=[]
+        for i in port_range:
+            # socket(family_address, protocol)
+            # TCP
+            scanner = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            # timeout = 0.3s
+            scanner.settimeout(0.3)
+            # connect_ex((IP, port))
+            result = scanner.connect_ex((host, i))
+            # check and display
+            if result==0:
+                service_name = get_service_name(i)
+                print(f'[+] {i}/tcp\tOPEN\t{service_name}')
+                open_ports_list.append(i)
+        print(f"Total ports scanned: {len(open_ports_list)}")
+    finally:
+        scanner.close()
+        print('\n[OK] Closed socket')
+
     return open_ports_list
+
+# Get service by port
+## port: int
+def get_service_name(port):
+    service_name = ''
+    try:
+        service_name = socket.getservbyport(port)
+    except:
+        service_name = 'unknown'
+
+    return service_name

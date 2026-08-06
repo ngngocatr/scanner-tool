@@ -45,24 +45,24 @@ End port: 1000
 
 ## 3. Quét TCP
 
-- [ ] Tạo socket bằng `socket.socket()`
-- [ ] Sử dụng IPv4 với `socket.AF_INET`
-- [ ] Sử dụng TCP với `socket.SOCK_STREAM`
-- [ ] Đặt thời gian chờ bằng `settimeout()`
-- [ ] Dùng `connect_ex()` để kiểm tra cổng
-- [ ] Xác định cổng mở khi `connect_ex()` trả về `0`
-- [ ] Quét lần lượt từng cổng trong phạm vi
-- [ ] Đóng socket sau mỗi lần kiểm tra
-- [ ] Không để chương trình bị treo khi gặp firewall
+- [X] Tạo socket bằng `socket.socket()`
+- [X] Sử dụng IPv4 với `socket.AF_INET`
+- [X] Sử dụng TCP với `socket.SOCK_STREAM`
+- [X] Đặt thời gian chờ bằng `settimeout()`
+- [X] Dùng `connect_ex()` để kiểm tra cổng
+- [X] Xác định cổng mở khi `connect_ex()` trả về `0`
+- [X] Quét lần lượt từng cổng trong phạm vi
+- [X] Đóng socket sau mỗi lần kiểm tra
+- [X] Không để chương trình bị treo khi gặp firewall
 
 ---
 
 ## 4. Hiển thị cổng mở
 
-- [ ] Chỉ hiển thị các cổng đang mở
-- [ ] Hiển thị số cổng
-- [ ] Hiển thị giao thức `tcp`
-- [ ] Hiển thị trạng thái `OPEN`
+- [X] Chỉ hiển thị các cổng đang mở
+- [X] Hiển thị số cổng
+- [X] Hiển thị giao thức `tcp`
+- [X] Hiển thị trạng thái `OPEN`
 
 Ví dụ:
 
@@ -76,10 +76,10 @@ Ví dụ:
 
 ## 5. Hiển thị tên dịch vụ
 
-- [ ] Dùng `socket.getservbyport(port, "tcp")`
-- [ ] Hiển thị tên dịch vụ tương ứng với số cổng
-- [ ] Xử lý trường hợp không xác định được dịch vụ
-- [ ] Hiển thị `unknown` khi tra cứu thất bại
+- [X] Dùng `socket.getservbyport(port, "tcp")`
+- [X] Hiển thị tên dịch vụ tương ứng với số cổng
+- [X] Xử lý trường hợp không xác định được dịch vụ
+- [X] Hiển thị `unknown` khi tra cứu thất bại
 
 Ví dụ:
 
