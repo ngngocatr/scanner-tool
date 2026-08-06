@@ -95,10 +95,10 @@ Ví dụ:
 
 ## 6. Lưu kết quả quét
 
-- [ ] Tạo danh sách chứa các cổng mở
-- [ ] Không chỉ in kết quả trực tiếp trong hàm quét
-- [ ] Lưu số cổng và tên dịch vụ
-- [ ] Sắp xếp kết quả theo số cổng
+- [X] Tạo danh sách chứa các cổng mở
+- [X] Không chỉ in kết quả trực tiếp trong hàm quét
+- [X] Lưu số cổng và tên dịch vụ
+- [X] Sắp xếp kết quả theo số cổng
 
 Ví dụ:
 
@@ -110,11 +110,11 @@ open_ports = []
 
 ## 7. Đo thời gian quét
 
-- [ ] Import thư viện `time`
-- [ ] Ghi thời điểm bắt đầu bằng `time.perf_counter()`
-- [ ] Ghi thời điểm kết thúc
-- [ ] Tính tổng thời gian quét
-- [ ] Hiển thị thời gian với hai chữ số thập phân
+- [X] Import thư viện `time`
+- [X] Ghi thời điểm bắt đầu bằng `time.perf_counter()`
+- [X] Ghi thời điểm kết thúc
+- [X] Tính tổng thời gian quét
+- [X] Hiển thị thời gian với hai chữ số thập phân
 
 Ví dụ:
 
@@ -126,13 +126,13 @@ Scan completed in 3.25 seconds
 
 ## 8. Hiển thị tổng kết
 
-- [ ] Hiển thị target người dùng đã nhập
-- [ ] Hiển thị IP đã phân giải
-- [ ] Hiển thị phạm vi cổng đã quét
-- [ ] Hiển thị danh sách cổng mở
-- [ ] Hiển thị tổng số cổng mở
-- [ ] Hiển thị tổng thời gian quét
-- [ ] Thông báo khi không tìm thấy cổng mở
+- [X] Hiển thị target người dùng đã nhập
+- [X] Hiển thị IP đã phân giải
+- [X] Hiển thị phạm vi cổng đã quét
+- [X] Hiển thị danh sách cổng mở
+- [X] Hiển thị tổng số cổng mở
+- [X] Hiển thị tổng thời gian quét
+- [X] Thông báo khi không tìm thấy cổng mở
 
 Ví dụ:
 
@@ -151,13 +151,13 @@ Scan completed in 3.25 seconds
 
 ## 9. Xử lý lỗi cơ bản
 
-- [ ] Xử lý IP hoặc tên miền không hợp lệ
-- [ ] Xử lý cổng không hợp lệ
-- [ ] Xử lý lỗi chuyển chuỗi sang số
-- [ ] Xử lý lỗi socket
-- [ ] Cho phép dừng chương trình bằng `Ctrl + C`
-- [ ] Không để chương trình hiện traceback dài
-- [ ] Hiển thị thông báo lỗi rõ ràng
+- [X] Xử lý IP hoặc tên miền không hợp lệ
+- [X] Xử lý cổng không hợp lệ
+- [X] Xử lý lỗi chuyển chuỗi sang số
+- [X] Xử lý lỗi socket
+- [X] Cho phép dừng chương trình bằng `Ctrl + C`
+- [X] Không để chương trình hiện traceback dài
+- [X] Hiển thị thông báo lỗi rõ ràng
 
 Các lỗi nên xử lý:
 
@@ -172,13 +172,13 @@ KeyboardInterrupt
 
 ## 10. Chia chương trình thành các hàm
 
-- [ ] Hàm phân giải target
-- [ ] Hàm kiểm tra phạm vi cổng
-- [ ] Hàm quét một cổng
-- [ ] Hàm lấy tên dịch vụ
-- [ ] Hàm quét nhiều cổng
-- [ ] Hàm hiển thị kết quả
-- [ ] Hàm `main()`
+- [X] Hàm phân giải target
+- [X] Hàm kiểm tra phạm vi cổng
+- [X] Hàm quét một cổng
+- [X] Hàm lấy tên dịch vụ
+- [X] Hàm quét nhiều cổng
+- [X] Hàm hiển thị kết quả
+- [X] Hàm `main()`
 
 Khung chương trình:
 
@@ -219,16 +219,16 @@ if __name__ == "__main__":
 
 ## 11. Kiểm thử phiên bản cơ bản
 
-- [ ] Quét `127.0.0.1`
-- [ ] Quét một cổng đang mở
-- [ ] Quét một cổng đang đóng
-- [ ] Kiểm tra domain hợp lệ
-- [ ] Kiểm tra domain không tồn tại
-- [ ] Kiểm tra cổng âm
-- [ ] Kiểm tra cổng lớn hơn `65535`
-- [ ] Kiểm tra cổng bắt đầu lớn hơn cổng kết thúc
-- [ ] Kiểm tra nhập chữ thay cho số cổng
-- [ ] Kiểm tra dừng chương trình bằng `Ctrl + C`
+- [X] Quét `127.0.0.1`
+- [X] Quét một cổng đang mở
+- [X] Quét một cổng đang đóng
+- [X] Kiểm tra domain hợp lệ
+- [X] Kiểm tra domain không tồn tại
+- [X] Kiểm tra cổng âm
+- [X] Kiểm tra cổng lớn hơn `65535`
+- [X] Kiểm tra cổng bắt đầu lớn hơn cổng kết thúc
+- [X] Kiểm tra nhập chữ thay cho số cổng
+- [X] Kiểm tra dừng chương trình bằng `Ctrl + C`
 
 Có thể mở web server thử nghiệm:
 
@@ -277,17 +277,17 @@ Hiển thị kết quả và thời gian quét
 
 ### Checklist cuối cùng
 
-- [ ] Nhận IP hoặc domain
-- [ ] Nhận khoảng cổng
-- [ ] Kiểm tra dữ liệu nhập
-- [ ] Quét TCP bằng `connect_ex()`
-- [ ] Có timeout
-- [ ] Đóng socket đúng cách
-- [ ] Chỉ hiển thị cổng mở
-- [ ] Hiển thị tên dịch vụ
-- [ ] Lưu kết quả quét
-- [ ] Xử lý lỗi cơ bản
-- [ ] Đo thời gian
-- [ ] Hiển thị tổng kết
-- [ ] Chia code thành các hàm
-- [ ] Kiểm thử trên localhost hoặc máy lab
+- [X] Nhận IP hoặc domain
+- [X] Nhận khoảng cổng
+- [X] Kiểm tra dữ liệu nhập
+- [X] Quét TCP bằng `connect_ex()`
+- [X] Có timeout
+- [X] Đóng socket đúng cách
+- [X] Chỉ hiển thị cổng mở
+- [X] Hiển thị tên dịch vụ
+- [X] Lưu kết quả quét
+- [X] Xử lý lỗi cơ bản
+- [X] Đo thời gian
+- [X] Hiển thị tổng kết
+- [X] Chia code thành các hàm
+- [X] Kiểm thử trên localhost hoặc máy lab

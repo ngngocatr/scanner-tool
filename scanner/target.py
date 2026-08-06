@@ -72,7 +72,7 @@ def parse_port(ports):  # ports là chuỗi
 
             port_list = [port]
             mode = 'single'
-
+        port_list.sort()
         return mode, port_list
 
     except ValueError:

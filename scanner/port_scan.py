@@ -24,7 +24,7 @@ def common_ports_scan(host):
 # port: list
 def scan_ports(host, port_range):
     try:
-        open_ports_list=[]
+        open_ports_list={} # dictionary saves ports:services
         for i in port_range:
             # socket(family_address, protocol)
             # TCP
@@ -37,7 +37,7 @@ def scan_ports(host, port_range):
             if result==0:
                 service_name = get_service_name(i)
                 print(f'[+] {i}/tcp\tOPEN\t{service_name}')
-                open_ports_list.append(i)
+                open_ports_list[i] = service_name
         print(f"Total ports scanned: {len(open_ports_list)}")
     finally:
         scanner.close()
