@@ -8,11 +8,11 @@
 
 ## 1. Quét đa luồng
 
-- [ ] Học `threading.Thread`
-- [ ] Hiểu `target=...`
-- [ ] Hiểu `args=(...)`
-- [ ] Hiểu `start()`
-- [ ] Hiểu `join()`
+- [X] Học `threading.Thread`
+- [X] Hiểu `target=...`
+- [X] Hiểu `args=(...)`
+- [X] Hiểu `start()`
+- [X] Hiểu `join()`
 - [ ] Chia danh sách port cho nhiều thread
 - [ ] Thử quét bằng 10 thread
 - [ ] Thử quét bằng 50 thread

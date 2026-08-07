@@ -1,4 +1,4 @@
-import socket
+import socket, threading
 
 
 def common_ports_scan(host):
@@ -22,28 +22,64 @@ def common_ports_scan(host):
 
 # host: string
 # port: list
-def scan_ports(host, port_range):
-    try:
-        open_ports_list={} # dictionary saves ports:services
-        for i in port_range:
-            # socket(family_address, protocol)
-            # TCP
-            scanner = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            # timeout = 0.3s
-            scanner.settimeout(0.3)
-            # connect_ex((IP, port))
-            result = scanner.connect_ex((host, i))
-            # check and display
-            if result==0:
-                service_name = get_service_name(i)
-                print(f'[+] {i}/tcp\tOPEN\t{service_name}')
-                open_ports_list[i] = service_name
-        print(f"Total ports scanned: {len(open_ports_list)}")
-    finally:
-        scanner.close()
-        print('\n[OK] Closed socket')
+# def scan_ports(host, port_range):
+#     try:
+#         open_ports_list={} # dictionary saves ports:services
+#         for i in port_range:
+#             # socket(family_address, protocol)
+#             # TCP
+#             scanner = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#             # timeout = 0.3s
+#             scanner.settimeout(0.3)
+#             # connect_ex((IP, port))
+#             result = scanner.connect_ex((host, i))
+#             # check and display
+#             if result==0:
+#                 service_name = get_service_name(i)
+#                 print(f'[+] {i}/tcp\tOPEN\t{service_name}')
+#                 open_ports_list[i] = service_name
+#     finally:
+#         scanner.close()
 
+#     print(f"Total ports scanned: {len(open_ports_list)}")
+#     print('\n[OK] Closed socket')
+#     return open_ports_list
+
+def scan_ports(host, port_range):
+    open_ports_list = {}
+    threads = []
+
+    # Multi threads
+    ## 1 port = 1 thread
+    for port in port_range:
+        t = threading.Thread(target=scan_port, args=(host, port, open_ports_list))
+        t.start()
+        threads.append(t)
+
+    ## Wait all thread complete
+    for t in threads:
+        t.join()
+    
+    print(f"Total ports scanned: {len(open_ports_list)}")
+    print('\n[OK] Closed socket')
     return open_ports_list
+
+def scan_port(host, port, open_ports_list):
+    try:
+        # TCP
+        scanner = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # timeout = 0.3s
+        scanner.settimeout(0.3)
+        # connect_ex((IP, port))
+        result = scanner.connect_ex((host, port))
+        if result==0:
+            service_name = get_service_name(port)
+            open_ports_list[port] = service_name
+            print(f'[+] {port}/tcp\tOPEN\t{service_name}')
+
+    except:
+        if scanner:
+            scanner.close()
 
 # Display status scan
 def display_scan_info(host, mode, port_list):
