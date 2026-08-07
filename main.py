@@ -4,23 +4,11 @@ import pyfiglet
 
 from scanner.host_check import check_live_host
 from scanner.target import validate_ip, resolve_domain, parse_port
-from scanner.port_scan import scan_ports
+from scanner.port_scan import scan_ports, display_scan_info
+from config import COMMON_PORTS
 
 # IS_ERR = False
 
-COMMON_PORTS = (
-    "20,21,22,23,25,53,67,68,69,80,"
-    "88,110,111,119,123,135,137,138,139,143,"
-    "161,162,179,389,443,445,465,514,515,548,"
-    "554,587,631,636,873,902,989,990,993,995,"
-    "1025,1080,1194,1433,1434,1521,1723,1812,1813,1883,"
-    "1900,2049,2082,2083,2086,2087,2095,2096,2181,2375,"
-    "2376,2483,2484,3306,3389,3690,4369,4444,4500,4567,"
-    "5000,5060,5061,5432,5555,5631,5666,5900,5985,5986,"
-    "6000,6379,6443,6667,7001,7002,7070,8000,8008,8080,"
-    "8081,8088,8443,8888,9000,9042,9090,9092,9200,9418,"
-    "10000,11211,15672,27017,50070"
-)
 
 # Banner
 def banner_display():
@@ -103,22 +91,7 @@ def scan_port_range(host, port_input):
 
     mode, port_list = parsed_result
 
-    print('-'*48)
-    print(f'[+] Target: {host}')
-    print(f'[+] Mode: {mode}')
-
-    # Display scope
-    scope = ''
-    if mode=='range':
-        scope=f'{port_list[0]} --> {port_list[-1]}'
-    elif mode=='list':
-        for port in port_list:
-            scope+=str(port)+' '
-    else:
-        scope=port_list[0]
-    print(f'[+] Scope ({mode}): {scope}')
-
-    print('-'*48)
+    display_scan_info(host, mode, port_list)
     print('[+] Scanning.......')
 
 

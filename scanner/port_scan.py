@@ -45,6 +45,25 @@ def scan_ports(host, port_range):
 
     return open_ports_list
 
+# Display status scan
+def display_scan_info(host, mode, port_list):
+    print('-'*48)
+    print(f'[+] Target: {host}')
+    print(f'[+] Mode: {mode}')
+
+    # Display scope
+    scope = ''
+    if mode=='range':
+        scope=f'{port_list[0]} --> {port_list[-1]}'
+    elif mode=='list':
+        for port in port_list:
+            scope+=str(port)+' '
+    else:
+        scope=port_list[0]
+    print(f'[+] Scope ({mode}): {scope}')
+
+    print('-'*48)
+
 # Get service by port
 ## port: int
 def get_service_name(port):
