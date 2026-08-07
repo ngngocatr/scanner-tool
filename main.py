@@ -108,6 +108,9 @@ def main():
     # get IP/domain from user imput
     ip=get_target_ip(host)
 
+    if ip is None:
+        return
+
     # check live hosts
     if args.live_host:
         display_host_status(ip)
@@ -115,12 +118,10 @@ def main():
     
     # Scan ports
     if args.port:
-        if validate_ip(ip):
             scan_port_range(ip, args.port)
 
     # Scan common ports
     if args.common:
-        if validate_ip(ip):
             scan_port_range(ip, COMMON_PORTS)
     
 if __name__=="__main__":
