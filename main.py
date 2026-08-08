@@ -5,7 +5,7 @@ import pyfiglet
 from scanner.host_check import check_live_host
 from scanner.target import validate_ip, resolve_domain, parse_port
 from scanner.port_scan import scan_ports, display_scan_info
-from config import COMMON_PORTS
+from config import COMMON_PORTS, DEFAULT_MAX_WORKER
 
 # IS_ERR = False
 
@@ -47,6 +47,12 @@ def parse_arg():
                 # type=str, # mặc định nhận string nên không cần 
                 help='Scan common ports'
         )
+
+    # Define number of threads
+    parser.add_argument(
+         '--threads',
+         help='Number of threads used for scanning'
+    )
     
     return parser.parse_args()
 
@@ -82,7 +88,7 @@ def display_host_status(ip):
         print(f'[!] IP {ip} invalid!')
 
 # Scan port by range
-def scan_port_range(host, port_input):
+def scan_port_range(host, port_input, workers):
     parsed_result = parse_port(port_input)
     # print(parsed_result)
     if parsed_result is False:
@@ -91,11 +97,11 @@ def scan_port_range(host, port_input):
 
     mode, port_list = parsed_result
 
-    display_scan_info(host, mode, port_list)
+    display_scan_info(host, mode, port_list, workers)
     print('[+] Scanning.......')
 
 
-    open_ports = scan_ports(host, port_list)
+    open_ports = scan_ports(host, port_list, workers)
     return open_ports
     
 
@@ -115,14 +121,21 @@ def main():
     if args.live_host:
         display_host_status(ip)
 
-    
+    # Define number of threads
+    workers = DEFAULT_MAX_WORKER
+    if args.threads:
+        workers = int(args.threads)
+
     # Scan ports
     if args.port:
-            scan_port_range(ip, args.port)
+        scan_port_range(ip, args.port, workers)
 
     # Scan common ports
     if args.common:
-            scan_port_range(ip, COMMON_PORTS)
+        scan_port_range(ip, COMMON_PORTS)
+
+    
+         
     
 if __name__=="__main__":
     # Start time

@@ -13,13 +13,13 @@
 - [X] Hiểu `args=(...)`
 - [X] Hiểu `start()`
 - [X] Hiểu `join()`
-- [ ] Chia danh sách port cho nhiều thread
-- [ ] Thử quét bằng 10 thread
-- [ ] Thử quét bằng 50 thread
-- [ ] So sánh thời gian với bản quét tuần tự
-- [ ] Không tạo quá nhiều thread mất kiểm soát
-- [ ] Học `ThreadPoolExecutor`
-- [ ] Cho phép chọn số worker bằng CLI
+- [X] Chia danh sách port cho nhiều thread
+- [X] Thử quét bằng 10 thread
+- [X] Thử quét bằng 50 thread
+- [X] So sánh thời gian với bản quét tuần tự
+- [X] Không tạo quá nhiều thread mất kiểm soát
+- [X] Học `ThreadPoolExecutor`
+- [X] Cho phép chọn số worker bằng CLI
 
 Ví dụ:
 

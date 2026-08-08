@@ -1,4 +1,6 @@
 import socket, threading
+from concurrent.futures import ThreadPoolExecutor
+
 
 
 def common_ports_scan(host):
@@ -18,51 +20,23 @@ def common_ports_scan(host):
     else:
         return False
 
-# print(common_ports_scan("192.168.1.201"))
 
-# host: string
-# port: list
-# def scan_ports(host, port_range):
-#     try:
-#         open_ports_list={} # dictionary saves ports:services
-#         for i in port_range:
-#             # socket(family_address, protocol)
-#             # TCP
-#             scanner = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#             # timeout = 0.3s
-#             scanner.settimeout(0.3)
-#             # connect_ex((IP, port))
-#             result = scanner.connect_ex((host, i))
-#             # check and display
-#             if result==0:
-#                 service_name = get_service_name(i)
-#                 print(f'[+] {i}/tcp\tOPEN\t{service_name}')
-#                 open_ports_list[i] = service_name
-#     finally:
-#         scanner.close()
-
-#     print(f"Total ports scanned: {len(open_ports_list)}")
-#     print('\n[OK] Closed socket')
-#     return open_ports_list
-
-def scan_ports(host, port_range):
+def scan_ports(host, port_range, workers):
     open_ports_list = {}
     threads = []
 
     # Multi threads
-    ## 1 port = 1 thread
-    for port in port_range:
-        t = threading.Thread(target=scan_port, args=(host, port, open_ports_list))
-        t.start()
-        threads.append(t)
-
-    ## Wait all thread complete
-    for t in threads:
-        t.join()
+    # Limit number of thread by max_worker of ThreadPoolExcutor
+    with ThreadPoolExecutor(max_workers=workers) as excutor:
+        for port in port_range:
+            excutor.submit(scan_port, host, port, open_ports_list)
     
     print(f"Total ports scanned: {len(open_ports_list)}")
     print('\n[OK] Closed socket')
     return open_ports_list
+
+# Each port prints on one line
+print_lock = threading.Lock()
 
 def scan_port(host, port, open_ports_list):
     try:
@@ -75,17 +49,23 @@ def scan_port(host, port, open_ports_list):
         if result==0:
             service_name = get_service_name(port)
             open_ports_list[port] = service_name
-            print(f'[+] {port}/tcp\tOPEN\t{service_name}')
 
-    except:
+            
+            with print_lock:
+                print(f'[+] {port}/tcp\tOPEN\t{service_name}')
+
+
+    finally:
         if scanner:
             scanner.close()
 
 # Display status scan
-def display_scan_info(host, mode, port_list):
+def display_scan_info(host, mode, port_list, workers):
     print('-'*48)
     print(f'[+] Target: {host}')
     print(f'[+] Mode: {mode}')
+    print(f'[+] Number of Threads: {workers}')
+
 
     # Display scope
     scope = ''
