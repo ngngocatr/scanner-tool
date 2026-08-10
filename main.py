@@ -53,6 +53,13 @@ def parse_arg():
          '--threads',
          help='Number of threads used for scanning'
     )
+
+    # Verbose output
+    parser.add_argument(
+             '-v', '--verbose',
+             action="store_true",
+             help='Verbose output'
+        )
     
     return parser.parse_args()
 
@@ -88,7 +95,7 @@ def display_host_status(ip):
         print(f'[!] IP {ip} invalid!')
 
 # Scan port by range
-def scan_port_range(host, port_input, workers):
+def scan_port_range(host, port_input, workers, verbose):
     parsed_result = parse_port(port_input)
     # print(parsed_result)
     if parsed_result is False:
@@ -101,7 +108,7 @@ def scan_port_range(host, port_input, workers):
     print('[+] Scanning.......')
 
 
-    open_ports = scan_ports(host, port_list, workers)
+    open_ports = scan_ports(host, port_list, workers, verbose)
     return open_ports
     
 
@@ -126,13 +133,16 @@ def main():
     if args.threads:
         workers = int(args.threads)
 
+    verbose = args.verbose
+    
+
     # Scan ports
     if args.port:
-        scan_port_range(ip, args.port, workers)
+        scan_port_range(ip, args.port, workers, verbose)
 
     # Scan common ports
     if args.common:
-        scan_port_range(ip, COMMON_PORTS)
+        scan_port_range(ip, COMMON_PORTS, workers, verbose)
 
     
          

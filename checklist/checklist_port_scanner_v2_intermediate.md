@@ -31,11 +31,11 @@ python main.py 192.168.1.10 -p 1-1000 -t 50
 
 ## 2. Chế độ quét common ports
 
-- [ ] Tạo danh sách common ports
-- [ ] Viết hàm `scan_common_ports()`
-- [ ] Thêm tham số `--common`
-- [ ] Cho phép quét một port duy nhất
-- [ ] Cho phép quét một khoảng port
+- [X] Tạo danh sách common ports
+- [X] Viết hàm `scan_common_ports()`
+- [X] Thêm tham số `--common`
+- [X] Cho phép quét một port duy nhất
+- [X] Cho phép quét một khoảng port
 
 Ví dụ:
 
@@ -62,16 +62,16 @@ Common ports gợi ý:
 
 ## 3. Nâng cấp argparse
 
-- [ ] `target` là positional argument
-- [ ] Thêm `-p / --ports`
-- [ ] Thêm `-t / --threads`
-- [ ] Thêm `--common`
-- [ ] Thêm `--timeout`
+- [X] `target` là positional argument
+- [X] Thêm `-p / --ports`
+- [X] Thêm `-t / --threads`
+- [X] Thêm `--common`
+- [] Thêm `--timeout`
 - [ ] Thêm `-v / --verbose`
 - [ ] Thêm `-o / --output`
 - [ ] Thêm `--skip-ping`
-- [ ] Hiển thị help rõ ràng
-- [ ] Validate các tham số CLI
+- [X] Hiển thị help rõ ràng
+- [X] Validate các tham số CLI
 
 Ví dụ:
 

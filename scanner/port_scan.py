@@ -1,5 +1,5 @@
 import socket, threading
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 
@@ -21,22 +21,71 @@ def common_ports_scan(host):
         return False
 
 
-def scan_ports(host, port_range, workers):
+def scan_ports(host, port_range, workers, verbose = False):
     open_ports_list = {}
+    completed = 0
+    total_ports = len(port_range)
     threads = []
+    previous_open_count = 0
 
     # Multi threads
     # Limit number of thread by max_worker of ThreadPoolExcutor
     with ThreadPoolExecutor(max_workers=workers) as excutor:
-        for port in port_range:
-            excutor.submit(scan_port, host, port, open_ports_list)
-    
-    print(f"Total ports scanned: {len(open_ports_list)}")
-    print('\n[OK] Closed socket')
+        futures = []
+        try:
+            for port in port_range:
+                future = excutor.submit(scan_port, host, port, open_ports_list)
+                futures.append(future)
+
+            for future in as_completed(futures):
+                completed+=1
+
+                current_open_count = len(open_ports_list)
+
+                if current_open_count != previous_open_count:
+                    print(
+                        f"\n[+] Found {current_open_count} open port(s)"
+                    )
+
+                    previous_open_count = current_open_count
+
+                if verbose==True:
+                    percent = completed/total_ports*100.0
+                    print(
+                        f"\rScanning: {percent:.0f}% "
+                        f"[{completed}/{total_ports}]",
+                        end=""
+                    )
+        except KeyboardInterrupt:
+            print("\n[!] Scan interrupted by user")
+
+            for future in futures:
+                future.cancel()
+
+            excutor.shutdown(
+                wait=False,
+                cancel_futures=True
+            )
+
+            return open_ports_list
+        
+        if verbose==True:
+            print()
+
+    print('-'*48)    
+    # In port mở sau khi scan xong
+    for port, service in sorted(open_ports_list.items()):
+        print(f"[+] {port}/tcp\tOPEN\t{service}")
+
+    print('-'*5)
+    print(f"[+] Total ports scanned: {total_ports}")
+    print(f"[+] Open ports: {len(open_ports_list)}")
+
     return open_ports_list
 
 # Each port prints on one line
 print_lock = threading.Lock()
+
 
 def scan_port(host, port, open_ports_list):
     try:
@@ -49,11 +98,6 @@ def scan_port(host, port, open_ports_list):
         if result==0:
             service_name = get_service_name(port)
             open_ports_list[port] = service_name
-
-            
-            with print_lock:
-                print(f'[+] {port}/tcp\tOPEN\t{service_name}')
-
 
     finally:
         if scanner:
