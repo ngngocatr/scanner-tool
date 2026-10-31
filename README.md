@@ -68,9 +68,20 @@ Each module has a single responsibility: input handling (`target.py`), host disc
 ### Install
 
 ```bash
+# 1. Clone the repository
 git clone https://github.com/ngngocatr/scanner-tool.git
 cd scanner-tool
-pip install pyfiglet
+
+# 2. Create and activate a virtual environment
+python3 -m venv venv
+
+# On Linux/macOS:
+source venv/bin/activate
+# On Windows:
+.\venv\Scripts\activate
+
+# 3. Install requirements
+pip install -r requirements.txt
 ```
 
 ### Basic usage
