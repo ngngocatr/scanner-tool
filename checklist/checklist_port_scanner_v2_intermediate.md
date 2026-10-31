@@ -67,7 +67,7 @@ Common ports gợi ý:
 - [X] Thêm `-t / --threads`
 - [X] Thêm `--common`
 - [] Thêm `--timeout`
-- [ ] Thêm `-v / --verbose`
+- [X] Thêm `-v / --verbose`
 - [ ] Thêm `-o / --output`
 - [ ] Thêm `--skip-ping`
 - [X] Hiển thị help rõ ràng
